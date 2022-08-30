@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html>
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>电竞经理招募计算器</title>
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?f13924673de3fccb790437d432ff96b6";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+	</head>
+    <link rel="stylesheet" href="css/index.css?version=8.0.1">
+    <link rel="stylesheet" href="css/animate.css">
+    <script src="js/jquery.min.js?version=7.0.1"></script>	
+    <script src="js/scroll.js"></script>
+	<body>
+        <div class="mainbox">
+            <ul class="tab_menu">
+                <li class="current">招聘计算器</li>
+                <li>装备图鉴</li>
+                <li>智能BP</li>
+                <li>加入我们</li>
+                <li>打赏</li>
+            </ul>    
+            <div class="main_contain">
+                <div class="tab_item xuanshou">
+                    <div class="chose clearboth">    			
+                        <div class="box">    				
+                            <span class="label">地区</span>    				
+                            <ul class="ul1" id="position">
+                            </ul>    			
+                        </div>
+                        <div class="box">    				
+                            <span class="label">战队</span>    				
+                            <ul class="ul1" id="party">
+                            </ul>    			
+                        </div>   
+                        <div class="box">    				
+                            <span class="label">位置</span>    				
+                            <ul class="ul1" id="desigon">
+                            </ul>    			
+                        </div>   
+                        <div class="box">    				
+                            <span class="label">属性1</span>    				
+                            <ul class="ul1" id="pro">
+                            </ul>    			
+                        </div>    
+                        <div class="box">    				
+                            <span class="label">属性2</span>    				
+                            <ul class="ul1" id="pro2">
+                            </ul>    			
+                        </div>
+                        <div class="box">    				
+                            <span class="label">品质</span>    				
+                            <ul class="ul1" id="ssr">
+                            </ul>    			
+                        </div>
+                        <div class="box">    				
+                            <span class="label">选手名称</span>
+                            <input type="text" id="player_name">
+                            <button id="name_query" style="">查询</button>    				
+                        </div>         			
+                            <button class="reset">重置</button>
+                    </div>    		
+                    <div id="result_card">
+                    </div>    	
+                </div>
+                <div  class="tab_item zhuangbei">
+                    <div class="chose clearboth">    			
+                        <div class="box">    				
+                            <span class="label">套装名称</span>    				
+                            <ul class="ul2" id="equip">
+                            </ul>    			
+                        </div>
+                        <div class="box">    				
+                            <span class="label">装备位置</span>    				
+                            <ul class="ul2" id="position1">
+                            </ul>    			
+                        </div>   
+                        <div class="box">    				
+                            <span class="label">装备品质</span>    				
+                            <ul class="ul2" id="quality">
+                            </ul>    			
+                        </div>
+                        <div class="box">    				
+                            <span class="label">搜索</span>
+                            <input type="text" id="search">
+                            <button id="eq_query">查询</button>    				
+                        </div>    
+                        <button class="reset">重置</button>
+                    </div>    		
+                    <div id="result_table">
+                        <!-- <table border="1" cellspacing="0" cellpadding="0" align="center">
+                            <thead>
+                                <tr class="pingzhi">
+                                    <td style="min-width:0.55rem ;">图标</td>
+                                    <td style="min-width:1rem ;">装备名称</td>
+                                    <td style="min-width:0.5rem;">品质</td>
+                                    <td style="min-width:0.8rem;">所属套装</td>
+                                    <td style="min-width:0.8rem;">装备位置</td>
+                                    <td style="min-width:1.35rem;">套装属性</td>
+                                </tr>
+                            </thead>
+                            <tbody class="eq_tbody">
+                          </tbody>
+                        </table> -->
+                    </div>  
+                </div>
+                <div  class="tab_item bp">
+                    <div class="chose clearboth">    			
+                        <div class="box">    				
+                            <span class="label">战队</span>    				
+                            <ul class="ul3" id="BP_desigon">
+                            </ul>    			
+                        </div>
+                        <div class="box">    				
+                            <span class="label">位置</span>    				
+                            <ul class="ul3" id="BP_party">
+                            </ul>    			
+                        </div>   
+                        <div class="box">    				
+                            <span class="label">搜索</span>
+                            <input type="text" id="BP_search">
+                            <button id="bp_query">查询</button>    				
+                        </div>    
+                        <button class="reset">重置</button>
+                    </div>    		
+                    <div id="result_table1">
+                    </div>  
+                </div>
+                <div class="tab_item join" >
+                    <div>
+                        <h2>电竞经理同好会</h2>
+                        <img src="./images/tonghao.jpg" width="258" alt="电竞经理同好会">
+                    </div>
+                    <div>
+                        <h2>公众号</h2>
+                        <img src="./images/geren.jpg" alt="公众号">
+                    </div>
+                </div>
+                <div class="tab_item join" >
+                    <div>
+                        <h2>如果对您觉得该站对您有帮助,可适量打赏支援一下域名和UI费用QAQ</h2>
+                        <img src="./images/dashang.png" width="258" alt="">
+                        <h2>打赏者名单</h2>
+                        <div class="card">
+                            <div class="myscroll_title">
+                                <ul>
+                                    <li><span>打赏姥爷</span><span>赞助金额</span> <span>留言</span></li>
+                                </ul>
+                            </div>
+                            <div class="myscroll">
+                                <ul id="dashang_list">
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>    		
+            
+        </div>		
+    <div class="dialog">
+        <span class="off">关闭</span>
+        <p class="title">公告</p>
+        <div class="dialog_contant">
+            <p class="margin">感谢使用本工具，左上角为本工具的三大基础功能
+                本工具由B站UP-摩登西杰和是东哥哥啊亲 联合出品
+                大家有使用问题可以点击右上角的加入我们进群交流哦</p>
+            <p>Q：招牌计算器如何使用？</p><p class="margin">
+                A：大家可以参考b站投稿视频
+                <a href="https://www.bilibili.com/video/BV1Te4y1Q7wS">https://www.bilibili.com/video/BV1Te4y1Q7wS</a>
+                </p>
+            <p>Q:装备图鉴使用方法？</p><p class="margin">
+                A:只需要点击筛选套装名称、装备位置即可</p>
+            <p>Q:智能BP功能如何使用？</p><p class="margin">
+                A:大家在排位对局BP环节筛选敌方战力较高的核心选手的位置和战队即可看到应对方法</p>
+            <p>Q:该工具需要收费嘛？</p><p class="margin">
+                A:<span> 永久免费！</span>需要收费的均为盗版，不过大家可以右上角打赏，支援一下域名和ui费用QAQ</p>    
+        </div>
+    </div>		
+    <script type="text/javascript">
+        const  formContent={
+            search:"",
+            position:"",
+            desigon:"",
+            party:"",
+            pro:"",
+            pro2:"",
+            ssr:""
+        }
+        const formContent1 = {
+            equip: "",
+            position: "",
+            quality: "",
+            search: ""
+        }
+         
+        const formContent2 = {
+            desigon: "",
+            party:"",
+            search: ""
+        }
+        $('.tab_item:eq(0)').show()
+        query(true)
+        eq_query(true)
+        BP_query(true)
+        $(function(){	
+            //tab切换
+            $('.tab_menu').on('click','li',function(){
+                $(this).addClass('current');	
+                $(this).siblings('li').removeClass('current')
+                $(`.tab_item:eq(${$(this).index()})`).show().siblings('.tab_item').hide()
+                if($(this).index()==4){
+                    dashang_query()
+                }
+            })
+            //关闭弹窗
+            $(".off").click(function(){
+                $(".dialog").hide()
+            })
+            // 选手名查询
+            $("#name_query").click(function(){
+                formContent.search = $('#player_name').val()
+                query()
+            })
+            //选手选项筛选
+            $(".ul1").on('click','li',function() {
+                if($(this).hasClass("act")){						
+                    $(this).removeClass('act'); 	
+                    formContent[$(this).parent()[0].id] = ''					
+                }else{						
+                    $(this).addClass('act');	
+                    $(this).siblings('li').removeClass('act')				
+                    formContent[$(this).parent()[0].id] = $(this).data('id')
+                }	
+                query()
+                });
+                //选项重置	
+                $('.reset').click(function(){
+                    var index = $('.tab_menu .current').index();
+                    if(index==0){
+                        $('#player_name').val('')
+                        for(var key in formContent){
+                        formContent[key] = ''
+                        }
+                    query()
+                    var el = $(".xuanshou .act")
+                    for (let index = 0; index < el.length; index++) {
+                            el[index].classList.remove('act'); 						
+                    }
+                    }else if(index==1){
+                        $('#search').val('')
+                        for(var key in formContent1){
+                        formContent1[key] = ''
+                    }
+                    eq_query()
+                    var el = $(".zhuangbei .act")
+                    for (let index = 0; index < el.length; index++) {
+                            el[index].classList.remove('act'); 						
+                    }
+                    }else{
+                        $('#BP_search').val('')
+                        for(var key in formContent2){
+                        formContent2[key] = ''
+                    }
+                    BP_query()
+                    var el = $(".bp .act")
+                    for (let index = 0; index < el.length; index++) {
+                            el[index].classList.remove('act'); 						
+                    }
+                    }
+                })  
+                //装备信息筛选
+                $(".ul2").on('click','li',function() {
+                if($(this).hasClass("act")){						
+                    $(this).removeClass('act');
+                    if($(this).parent()[0].id=='position1'){
+                        formContent1.position = ''
+                    }else{
+                        formContent1[$(this).parent()[0].id] = ''					
+                    } 	
+                }else{						
+                    $(this).addClass('act');	
+                    $(this).siblings('li').removeClass('act')	
+                    if($(this).parent()[0].id=='position1'){
+                        formContent1.position = $(this).data('id')
+                    }else{
+                        formContent1[$(this).parent()[0].id] = $(this).data('id')
+                    }
+                }	
+                eq_query()
+                });
+
+                //BP信息筛选
+                $(".ul3").on('click','li',function() {
+                    if($(this).hasClass("act")){						
+                        $(this).removeClass('act');
+                        if($(this).parent()[0].id=='BP_desigon'){
+                            formContent2.desigon = ''
+                        }else if($(this).parent()[0].id=='BP_party'){
+                            formContent2.party = ''					
+                        } 	
+                    }else{						
+                        $(this).addClass('act');	
+                        $(this).siblings('li').removeClass('act')
+                        if($(this).parent()[0].id=='BP_desigon'){
+                            formContent2.desigon = $(this).data('id')
+                        }else if($(this).parent()[0].id=='BP_party'){
+                            formContent2.party = $(this).data('id')				
+                        } 		
+                    }	
+                    BP_query()
+                });
+                //装备查询
+                $("#eq_query").click(function(){
+                    formContent1.search = $('#search').val()
+                    eq_query()
+                })
+                
+                // 选手名查询
+                $("#bp_query").click(function(){
+                    formContent2.search = $('#BP_search').val()
+                    BP_query()
+                })
+        });
+        //打赏名单查询
+        function dashang_query(){
+            var data=[
+                {name:'唐*宁',amount:10,msg:'加油'},
+                {name:'觅 ',amount:5,msg:''},
+                {name:'Hx',amount:3,msg:'加油加油'},
+                {name:'丶K***y',amount:3,msg:'加油'},
+                {name:'**宁',amount:10,msg:'加油'},
+                {name:'觅 ',amount:5,msg:''},
+                {name:'H*',amount:3,msg:'加油加油'},
+                {name:'丶G***y',amount:3,msg:'加油'},
+                {name:'唐*宁',amount:10,msg:'加油'},
+                {name:'张dss ',amount:5,msg:''},
+                {name:'Hx',amount:3,msg:'加油加油'},
+                {name:'丶K***y',amount:3,msg:'加油'},
+                {name:'唐*宁',amount:10,msg:'加油'},
+                {name:'觅 ',amount:5,msg:''},
+                {name:'Hx',amount:3,msg:'加油加油'},
+                {name:'丶K***y',amount:3,msg:'加油'},
+                {name:'唐*宁',amount:10,msg:'加油'},
+                {name:'觅 ',amount:5,msg:''},
+                {name:'Hx',amount:3,msg:'加油加油'},
+                {name:'丶K***y',amount:3,msg:'加油'},
+                {name:'唐*宁',amount:10,msg:'加油'},
+                {name:'觅 ',amount:5,msg:''},
+                {name:'Hx',amount:3,msg:'加油加油'},
+                {name:'丶K***y',amount:3,msg:'加油'},
+            ]
+                data.forEach(item => {
+                        $('#dashang_list').append(`
+                        <li><span>${item.name}</span><span>￥${item.amount}元</span> <span>${item.msg}</span></li>
+                        `)
+                });
+                $('.myscroll').myScroll({
+                        speed: 40, 
+                        rowHeight: 36 
+                    });
+        }
+        // 装备查询
+        function eq_query(first_query=false){
+            $('#result_table').empty()
+            $.get('http://cps-sdk.spxgames.com/v3/djjjr/equips',formContent1,function(res){
+                if(first_query){
+                    for(var key in res.data){
+                            switch (key){
+                                case 'equipSelect':
+                                    for(var item_key in res.data[key]){
+                                        $('#equip').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                    break
+                                    case 'positionSelect':
+                                    for(var item_key in res.data[key]){
+                                        $('#position1').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                    break
+                                    case 'qualitySelect':
+                                    for(var item_key in res.data[key]){
+                                        $('#quality').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                }
+                    }
+                }
+                if(res.data.list.data.length>0){
+                    res.data.list.data.forEach((item,index) => {
+                        switch (item.euqip_quality){
+                            case "A-蓝":    
+                                $('#result_table').append(`
+                                    <div class="item a animate__animated animate__backInRight">
+                                        <div class="item-info">
+                                            <div class="item-icon">
+                                                <img src="${item.icon}">
+                                            </div>
+                                            <div class="item-rare">${item.euqip_quality}</div>
+                                            <div class="item-name">${item.name}</div>
+                                            <div class="item-field">${item.euqip_position}</div>
+                                            <div class="item-set">
+                                                <div class="item-set-name">${item.euqip}</div>
+                                                <div class="item-set-info">${item.effect}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `)
+                            break  
+                            case "A-紫":
+                                $('#result_table').append(`
+                                    <div class="item ap animate__animated animate__backInRight">
+                                        <div class="item-info">
+                                            <div class="item-icon">
+                                                <img src="${item.icon}">
+                                            </div>
+                                            <div class="item-rare">${item.euqip_quality}</div>
+                                            <div class="item-name">${item.name}</div>
+                                            <div class="item-field">${item.euqip_position}</div>
+                                            <div class="item-set">
+                                                <div class="item-set-name">${item.euqip}</div>
+                                                <div class="item-set-info">${item.effect}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `)
+                            break
+                            case "S":
+                                $('#result_table').append(`
+                                    <div class="item s animate__animated animate__backInRight">
+                                        <div class="item-info">
+                                            <div class="item-icon">
+                                                <img src="${item.icon}">
+                                            </div>
+                                            <div class="item-rare">${item.euqip_quality}</div>
+                                            <div class="item-name">${item.name}</div>
+                                            <div class="item-field">${item.euqip_position}</div>
+                                            <div class="item-set">
+                                                <div class="item-set-name">${item.euqip}</div>
+                                                <div class="item-set-info">${item.effect}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `)
+                            break
+                            case "S+":
+                                $('#result_table').append(`
+                                    <div class="item sp animate__animated animate__backInRight">
+                                        <div class="item-info">
+                                            <div class="item-icon">
+                                                <img src="${item.icon}">
+                                            </div>
+                                            <div class="item-rare">${item.euqip_quality}</div>
+                                            <div class="item-name">${item.name}</div>
+                                            <div class="item-field">${item.euqip_position}</div>
+                                            <div class="item-set">
+                                                <div class="item-set-name">${item.euqip}</div>
+                                                <div class="item-set-info">${item.effect}</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                `)
+                            break  
+                        }
+                    });
+                }
+            })
+        }
+        //选手计算器查询		
+        function query(first_query=false){
+            $('#result_card').empty()
+            $.get('http://cps-sdk.spxgames.com/v3/djjjr/init',formContent,function(res){
+                if(first_query){
+                    for(var key in res.data){
+                        if(key!='formContent'&&key!='list'){
+                            switch (key){
+                                case 'positionSelect':
+                                    for(var item_key in res.data[key]){
+                                        $('#position').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                    break
+                                    case 'desigonSelect':
+                                    for(var item_key in res.data[key]){
+                                        $('#desigon').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                    break
+                                    case 'partySelect':
+                                    for(var item_key in res.data[key]){
+                                        $('#party').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                    break
+                                    case 'pro2Select':
+                                    for(var item_key in res.data[key]){
+                                        $('#pro2').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                    break
+                                    case 'proSelect':
+                                    for(var item_key in res.data[key]){
+                                        $('#pro').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                    break
+                                    case 'ssrSelect':
+                                    for(var item_key in res.data[key]){
+                                        $('#ssr').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                    break    
+                                }
+                            }
+                    }
+                }
+                if(res.data.list.data.length>0){
+                    res.data.list.data.forEach(item => {
+                            $('#result_card').append(`
+                            <div class="character ${item.quality}">
+                                <div class="c-party">${item.party}</div>
+                                <div class="c-rare"> ${item.quality}</div>
+                                <div class="c-position">${item.desigon}</div>
+                                <div class="c-name">${item.name}</div>
+                                <div class="c-tag tag1">${item.pro}</div>
+                                <div class="c-tag tag2">${item.pro2}</div>
+                                <div class="c-year">2022</div>
+                            </div>
+                            `)
+                    });
+                }
+            })
+        }	
+        //BP		
+        function BP_query(first_query=false){
+        $('#result_table1').empty()
+            $.get('http://cps-sdk.spxgames.com/v3/djjjr/bp',formContent2,function(res){
+                if(first_query){
+                    for(var key in res.data){
+                        if(key!='formContent'&&key!='list'){
+                            switch (key){
+                                case 'desigonSelect':
+                                    for(var item_key in res.data[key]){
+                                        $('#BP_desigon').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                    break
+                                    case 'partySelect':
+                                    for(var item_key in res.data[key]){
+                                        $('#BP_party').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                    }
+                                    break
+                                }
+                            }
+                    }
+                }
+                if(res.data.list.data.length>0){
+                    res.data.list.data.forEach(item => {
+                            $('#result_table1').append(`
+                                <div class="player animate__animated animate__backInLeft">
+                                    <div class="zhandui">${item.party}</div>
+                                    <div class="weizhi">${item.desigon}</div>
+                                    <div class="name">${item.name}</div>
+                                    <div class="container">
+                                        <div class="counter">
+                                            <p>应对方式</p>
+                                            <div>
+                                                ${item.counter}
+                                            </div>
+                                        </div>
+                                        <div class="comment">
+                                            <p>点评</p>
+                                            <div>
+                                                ${item.comment}
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            `)
+                    });
+                }
+            })
+        }
+    	</script> 
+	</body>
+</html>
