@@ -21,13 +21,14 @@
     <script src="js/scroll.js"></script>
 	<body>
         <div class="mainbox">
-            <ul class="tab_menu">
-                <li class="current">招聘计算器</li>
-                <li>装备图鉴</li>
-                <li>智能BP</li>
-                <li>加入我们</li>
-                <li>打赏</li>
-            </ul>    
+            <div class="tab_menu">
+                <span class="current">招聘计算器</span>
+                <span>装备图鉴</span>
+                <span>智能BP</span>
+                <span>加入我们</span>
+                <span>打赏</span>
+                <span>AI出卡</span>
+            </div>    
             <div class="main_contain">
                 <div class="tab_item xuanshou">
                     <div class="chose clearboth">    			
@@ -206,15 +207,19 @@
             party:"",
             search: ""
         }
-        $('.tab_item:eq(0)').show()
+        pageInit()
         query(true)
         eq_query(true)
         BP_query(true)
         $(function(){	
             //tab切换
-            $('.tab_menu').on('click','li',function(){
+            $('.tab_menu').on('click','span',function(){
+                if($(this).index()==5){
+                    window.location.href='./aick.html'
+                    return false
+                }
                 $(this).addClass('current');	
-                $(this).siblings('li').removeClass('current')
+                $(this).siblings('span').removeClass('current')
                 $(`.tab_item:eq(${$(this).index()})`).show().siblings('.tab_item').hide()
                 if($(this).index()==4){
                     dashang_query()
@@ -241,94 +246,114 @@
                 }	
                 query()
                 });
-                //选项重置	
-                $('.reset').click(function(){
-                    var index = $('.tab_menu .current').index();
-                    if(index==0){
-                        $('#player_name').val('')
-                        for(var key in formContent){
-                        formContent[key] = ''
-                        }
-                    query()
-                    var el = $(".xuanshou .act")
-                    for (let index = 0; index < el.length; index++) {
-                            el[index].classList.remove('act'); 						
+            //选项重置	
+            $('.reset').click(function(){
+                var index = $('.tab_menu .current').index();
+                if(index==0){
+                    $('#player_name').val('')
+                    for(var key in formContent){
+                    formContent[key] = ''
                     }
-                    }else if(index==1){
-                        $('#search').val('')
-                        for(var key in formContent1){
-                        formContent1[key] = ''
-                    }
-                    eq_query()
-                    var el = $(".zhuangbei .act")
-                    for (let index = 0; index < el.length; index++) {
-                            el[index].classList.remove('act'); 						
-                    }
-                    }else{
-                        $('#BP_search').val('')
-                        for(var key in formContent2){
-                        formContent2[key] = ''
-                    }
-                    BP_query()
-                    var el = $(".bp .act")
-                    for (let index = 0; index < el.length; index++) {
-                            el[index].classList.remove('act'); 						
-                    }
-                    }
-                })  
-                //装备信息筛选
-                $(".ul2").on('click','li',function() {
+                query()
+                var el = $(".xuanshou .act")
+                for (let index = 0; index < el.length; index++) {
+                        el[index].classList.remove('act'); 						
+                }
+                }else if(index==1){
+                    $('#search').val('')
+                    for(var key in formContent1){
+                    formContent1[key] = ''
+                }
+                eq_query()
+                var el = $(".zhuangbei .act")
+                for (let index = 0; index < el.length; index++) {
+                        el[index].classList.remove('act'); 						
+                }
+                }else if(index==2){
+                    $('#BP_search').val('')
+                    for(var key in formContent2){
+                    formContent2[key] = ''
+                }
+                BP_query()
+                var el = $(".bp .act")
+                for (let index = 0; index < el.length; index++) {
+                        el[index].classList.remove('act'); 						
+                }
+                }
+                // else if(index==5){
+                //     for(var key in formContent3){
+                //     formContent3[key] = ''
+                // }
+                // var el = $(".aick .act")
+                // for (let index = 0; index < el.length; index++) {
+                //         el[index].classList.remove('act'); 						
+                // }
+                // aick_init()
+                // }
+            })  
+            //装备信息筛选
+            $(".ul2").on('click','li',function() {
+            if($(this).hasClass("act")){						
+                $(this).removeClass('act');
+                if($(this).parent()[0].id=='position1'){
+                    formContent1.position = ''
+                }else{
+                    formContent1[$(this).parent()[0].id] = ''					
+                } 	
+            }else{						
+                $(this).addClass('act');	
+                $(this).siblings('li').removeClass('act')	
+                if($(this).parent()[0].id=='position1'){
+                    formContent1.position = $(this).data('id')
+                }else{
+                    formContent1[$(this).parent()[0].id] = $(this).data('id')
+                }
+            }	
+            eq_query()
+            });
+
+            //BP信息筛选
+            $(".ul3").on('click','li',function() {
                 if($(this).hasClass("act")){						
                     $(this).removeClass('act');
-                    if($(this).parent()[0].id=='position1'){
-                        formContent1.position = ''
-                    }else{
-                        formContent1[$(this).parent()[0].id] = ''					
+                    if($(this).parent()[0].id=='BP_desigon'){
+                        formContent2.desigon = ''
+                    }else if($(this).parent()[0].id=='BP_party'){
+                        formContent2.party = ''					
                     } 	
                 }else{						
                     $(this).addClass('act');	
-                    $(this).siblings('li').removeClass('act')	
-                    if($(this).parent()[0].id=='position1'){
-                        formContent1.position = $(this).data('id')
-                    }else{
-                        formContent1[$(this).parent()[0].id] = $(this).data('id')
-                    }
+                    $(this).siblings('li').removeClass('act')
+                    if($(this).parent()[0].id=='BP_desigon'){
+                        formContent2.desigon = $(this).data('id')
+                    }else if($(this).parent()[0].id=='BP_party'){
+                        formContent2.party = $(this).data('id')				
+                    } 		
                 }	
+                BP_query()
+            });
+            //装备查询
+            $("#eq_query").click(function(){
+                formContent1.search = $('#search').val()
                 eq_query()
-                });
-
-                //BP信息筛选
-                $(".ul3").on('click','li',function() {
-                    if($(this).hasClass("act")){						
-                        $(this).removeClass('act');
-                        if($(this).parent()[0].id=='BP_desigon'){
-                            formContent2.desigon = ''
-                        }else if($(this).parent()[0].id=='BP_party'){
-                            formContent2.party = ''					
-                        } 	
-                    }else{						
-                        $(this).addClass('act');	
-                        $(this).siblings('li').removeClass('act')
-                        if($(this).parent()[0].id=='BP_desigon'){
-                            formContent2.desigon = $(this).data('id')
-                        }else if($(this).parent()[0].id=='BP_party'){
-                            formContent2.party = $(this).data('id')				
-                        } 		
-                    }	
-                    BP_query()
-                });
-                //装备查询
-                $("#eq_query").click(function(){
-                    formContent1.search = $('#search').val()
-                    eq_query()
-                })
-                
-                // 选手名查询
-                $("#bp_query").click(function(){
-                    formContent2.search = $('#BP_search').val()
-                    BP_query()
-                })
+            })
+            
+            // 选手名查询
+            $("#bp_query").click(function(){
+                formContent2.search = $('#BP_search').val()
+                BP_query()
+            })
         });
+        //页面初始化
+        function pageInit(){
+            $('.tab_item:eq(0)').show()
+        var dialogShow = sessionStorage.getItem('dialogShow')
+        console.log(dialogShow);
+        if(!dialogShow){
+            $(".dialog").show()
+            sessionStorage.setItem('dialogShow',true)
+        }
+        }
         //打赏名单查询
         function dashang_query(){
             var data=[
@@ -376,17 +401,17 @@
                             switch (key){
                                 case 'equipSelect':
                                     for(var item_key in res.data[key]){
-                                        $('#equip').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#equip').append(`<li data-id=${item_key} class="animate__animated animate__rollIn">${res.data[key][item_key]}</li>`)
                                     }
                                     break
                                     case 'positionSelect':
                                     for(var item_key in res.data[key]){
-                                        $('#position1').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#position1').append(`<li data-id=${item_key} class="animate__animated animate__rollIn">${res.data[key][item_key]}</li>`)
                                     }
                                     break
                                     case 'qualitySelect':
                                     for(var item_key in res.data[key]){
-                                        $('#quality').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#quality').append(`<li data-id=${item_key} class="animate__animated animate__rollIn">${res.data[key][item_key]}</li>`)
                                     }
                                 }
                     }
@@ -396,7 +421,7 @@
                         switch (item.euqip_quality){
                             case "A-蓝":    
                                 $('#result_table').append(`
-                                    <div class="item a animate__animated animate__backInRight">
+                                    <div class="item a animate__animated animate__flipInX">
                                         <div class="item-info">
                                             <div class="item-icon">
                                                 <img src="${item.icon}">
@@ -414,7 +439,7 @@
                             break  
                             case "A-紫":
                                 $('#result_table').append(`
-                                    <div class="item ap animate__animated animate__backInRight">
+                                    <div class="item ap animate__animated animate__flipInX">
                                         <div class="item-info">
                                             <div class="item-icon">
                                                 <img src="${item.icon}">
@@ -432,7 +457,7 @@
                             break
                             case "S":
                                 $('#result_table').append(`
-                                    <div class="item s animate__animated animate__backInRight">
+                                    <div class="item s animate__animated animate__flipInX">
                                         <div class="item-info">
                                             <div class="item-icon">
                                                 <img src="${item.icon}">
@@ -450,7 +475,7 @@
                             break
                             case "S+":
                                 $('#result_table').append(`
-                                    <div class="item sp animate__animated animate__backInRight">
+                                    <div class="item sp animate__animated animate__flipInX">
                                         <div class="item-info">
                                             <div class="item-icon">
                                                 <img src="${item.icon}">
@@ -481,32 +506,32 @@
                             switch (key){
                                 case 'positionSelect':
                                     for(var item_key in res.data[key]){
-                                        $('#position').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#position').append(`<li data-id=${item_key} class="animate__animated animate__flipInY">${res.data[key][item_key]}</li>`)
                                     }
                                     break
                                     case 'desigonSelect':
                                     for(var item_key in res.data[key]){
-                                        $('#desigon').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#desigon').append(`<li data-id=${item_key} class="animate__animated animate__flipInY">${res.data[key][item_key]}</li>`)
                                     }
                                     break
                                     case 'partySelect':
                                     for(var item_key in res.data[key]){
-                                        $('#party').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#party').append(`<li data-id=${item_key} class="animate__animated animate__flipInY">${res.data[key][item_key]}</li>`)
                                     }
                                     break
                                     case 'pro2Select':
                                     for(var item_key in res.data[key]){
-                                        $('#pro2').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#pro2').append(`<li data-id=${item_key} class="animate__animated animate__flipInY">${res.data[key][item_key]}</li>`)
                                     }
                                     break
                                     case 'proSelect':
                                     for(var item_key in res.data[key]){
-                                        $('#pro').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#pro').append(`<li data-id=${item_key} class="animate__animated animate__flipInY">${res.data[key][item_key]}</li>`)
                                     }
                                     break
                                     case 'ssrSelect':
                                     for(var item_key in res.data[key]){
-                                        $('#ssr').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#ssr').append(`<li data-id=${item_key} class="animate__animated animate__flipInY">${res.data[key][item_key]}</li>`)
                                     }
                                     break    
                                 }
@@ -516,7 +541,7 @@
                 if(res.data.list.data.length>0){
                     res.data.list.data.forEach(item => {
                             $('#result_card').append(`
-                            <div class="character ${item.quality}">
+                            <div class="character ${item.quality} animate__animated animate__zoomInDown">
                                 <div class="c-party">${item.party}</div>
                                 <div class="c-rare"> ${item.quality}</div>
                                 <div class="c-position">${item.desigon}</div>
@@ -540,12 +565,12 @@
                             switch (key){
                                 case 'desigonSelect':
                                     for(var item_key in res.data[key]){
-                                        $('#BP_desigon').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#BP_desigon').append(`<li data-id=${item_key} class="animate__animated animate__zoomIn">${res.data[key][item_key]}</li>`)
                                     }
                                     break
                                     case 'partySelect':
                                     for(var item_key in res.data[key]){
-                                        $('#BP_party').append(`<li data-id=${item_key}>${res.data[key][item_key]}</li>`)
+                                        $('#BP_party').append(`<li data-id=${item_key} class="animate__animated animate__zoomIn">${res.data[key][item_key]}</li>`)
                                     }
                                     break
                                 }

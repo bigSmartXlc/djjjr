@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>电竞经理招募计算器</title>
+        <script>
+            var _hmt = _hmt || [];
+            (function() {
+              var hm = document.createElement("script");
+              hm.src = "https://hm.baidu.com/hm.js?f13924673de3fccb790437d432ff96b6";
+              var s = document.getElementsByTagName("script")[0]; 
+              s.parentNode.insertBefore(hm, s);
+            })();
+        </script>
+</head>
+<link rel="stylesheet" href="css/index.css?version=8.0.1">
+    <link rel="stylesheet" href="css/animate.css">
+    <script src="js/jquery.min.js?version=7.0.1"></script>	
+    <script src="js/scroll.js"></script>
+<body>
+    <div class="mainbox">
+        <div class="main_contain">
+            <div  class="tab_item aick">
+                <div class="chose clearboth">    			
+                    <div class="box">    				
+                        <span class="label">一级团</span>    				
+                        <ul class="ul4" id="step_1">
+                            
+                        </ul>    			
+                    </div>
+                    <div class="box">    				
+                        <span class="label">游走团</span>    				
+                        <ul class="ul4" id="step_2">
+                        </ul>    			
+                    </div>   
+                    <div class="box">    				
+                        <span class="label">抓线团</span>    				
+                        <ul class="ul4" id="step_3">
+                        </ul>    			
+                    </div>
+                    <div class="box">    				
+                        <span class="label">小龙团</span>    				
+                        <ul class="ul4" id="step_4">
+                        </ul>    			
+                    </div>
+                    <div class="box">    				
+                        <span class="label">大龙团</span>    				
+                        <ul class="ul4" id="step_5">
+                        </ul>    			
+                    </div>
+                    <div class="box">    				
+                        <span class="label">决胜团</span>    				
+                        <ul class="ul4" id="step_6">
+                        </ul>    			
+                    </div>
+                    <button class="reset">重置</button>
+                </div>    		
+                <div id="result_table3">
+                </div>  
+            </div>
+        </div>
+    </div>
+    <script>
+         const formContent3 = {
+        }
+        aick_init()
+        $(function(){
+            //重置
+            $('.reset').click(function(){
+                for(var key in formContent3){
+                    formContent3[key] = ''
+                }
+                var el = $(".aick .act")
+                for (let index = 0; index < el.length; index++) {
+                        el[index].classList.remove('act'); 						
+                }
+                aick_init()
+            }) 
+
+
+             //ai出卡筛选
+             $(".ul4").on('click','li',function() {
+                var el_start = $(this).parent().parent().index()
+                formContent3.step = el_start+2
+                for(let index = el_start+1;index<=7;index++){
+                    delete formContent3[`step_`+index]
+                }
+                // if($(this).hasClass("act")){						
+                //     $(this).removeClass('act');
+                //     delete formContent3[$(this).parent()[0].id]
+                //     // formContent3[$(this).parent()[0].id] = ''
+                // }else{						
+                    $(this).addClass('act');	
+                    $(this).siblings('li').removeClass('act')
+                    formContent3[$(this).parent()[0].id] = $(this).data('name')
+                // }	
+                aick_query()
+            });
+        })
+         //ai出卡
+         function aick_query(){
+            $.post('http://cps-sdk.spxgames.com/v3/djjjr/pve/bp',formContent3,function(res){
+                $(`#step_${formContent3.step}`).empty()
+                $('#result_table3').empty()
+                if(res.data){
+                    res.data.forEach((item,index)=>{
+                    $(`#step_${formContent3.step}`).append(`
+                        <li data-name='${item.name}' class="animate__animated animate__flipInX">${item.name}</li>
+                        `)
+                        $('#result_table3').append(`
+                            <div class="item ai-item a animate__animated animate__flipInX">
+                                    <div class="item-info">
+                                        <div class="item-img">
+                                            <img src="${item.url}">
+                                        </div>
+                                        <div class="item-label" style="display:${item.probability?'inline-block':'none'}">${item.probability||''}</div>
+                                    </div>
+                            </div>
+                        `)
+                    })
+                }
+                var el = $('.aick .box')
+                var parent_ul = $('.aick .ul4')
+                for (let index =0 ; index < el.length; index++) {
+                    if(index>formContent3.step-1){
+                        $(parent_ul[index]).children().remove()
+                        $(el[index]).hide(); 						
+                    }else{
+                        $(el[index]).show(); 						
+                    }
+                }
+            })
+        }
+        // ai出卡初始化
+        function aick_init(){
+            $.get('http://cps-sdk.spxgames.com/v3/djjjr/pve',function(res){
+                $('#result_table3').empty()
+                var reset_el = $('.aick .ul4')
+                var reset_box = $('.aick .box')
+                for (let index =0 ; index < reset_el.length; index++) {
+                        $(reset_el[index]).children().remove()
+                        $(reset_box[index]).hide()
+                }
+                $(reset_box[0]).show()
+                res.data.list.forEach((item,index)=>{
+                    $('#step_1').append(`
+                    <li data-name='${item.name}' class="animate__animated animate__flipInX">${item.name}</li>
+                    `)
+                    $('#result_table3').append(`
+                                    <div class="item ai-item a animate__animated animate__flipInX">
+                                        <div class="item-info">
+                                            <div class="item-img">
+                                                <img src="${item.url}">
+                                            </div>
+                                            <div class="item-label"  style="display:${item.probability?'inline-block':'none'}">${item.probability||''}</div>
+                                        </div>
+                                    </div>
+                                `)
+                })
+            })
+        }
+    </script>
+</body>
+</html>
