@@ -62,11 +62,16 @@
             </div>
         </div>
     </div>
+    <div id="toIndex">返回首页</div>
     <script>
          const formContent3 = {
         }
         aick_init()
         $(function(){
+            //返回首页
+            $('#toIndex').click(function(){
+                window.location.href='./index.html'
+            })
             //重置
             $('.reset').click(function(){
                 for(var key in formContent3){

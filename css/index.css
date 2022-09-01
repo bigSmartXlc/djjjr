@@ -409,3 +409,16 @@ body{background:#575d79;height:auto;background:linear-gradient(135deg,rgb(73,78,
 .aick .box{
     display: none;
 }
+
+#toIndex{
+    position: fixed;
+    text-align: center;
+    width: .3rem;
+    top: 40vh;
+    right: .1rem;
+    border: solid 1px #000;
+    border-radius: 5px;
+    background-color: #333;
+    color: #fff;
+    font-size: .2rem;
+}
