@@ -63,11 +63,37 @@
         </div>
     </div>
     <div id="toIndex">返回首页</div>
+    <div class="dialog">
+        <span class="off">关闭</span>
+        <p class="title">出卡结果上传</p>
+        <div class="dialog_contant">
+            <p class="result"></p>
+            <p class="uploadTips">
+                大家勾选决胜团的电脑出卡后点击确定即可上传本场数据，大家上传的数据越多，我们的小工具精准度就会更高哦，希望大家上传精准的电脑出卡数据，不要乱选上传假数据，假数据过多会导致精准度降低呢
+            </p>
+            <button class="upload_btn">确认上传</button>    
+        </div>
+    </div>
+    <div class="result_msg"></div>
     <script>
          const formContent3 = {
         }
         aick_init()
         $(function(){
+            //上传
+            $('.upload_btn').click(()=>{
+                $('.upload_btn').attr('disabled',true)
+                $.post('http://cps-sdk.spxgames.com/v3/djjjr/pve/stats',formContent3,function(res){
+                    if(res.code==100000){
+                        $('.result_msg').html('上传成功').show()
+                        setTimeout(()=>{
+                            $('.dialog').hide()
+                            $('.result_msg').hide()
+                            $('.upload_btn').attr('disabled',false)
+                        },2000)
+                    }
+            })
+            })
             //返回首页
             $('#toIndex').click(function(){
                 window.location.href='./index.html'
@@ -83,8 +109,10 @@
                 }
                 aick_init()
             }) 
-
-
+            //关闭弹框
+            $('.off').click(()=>{
+                $('.dialog').hide()
+            })
              //ai出卡筛选
              $(".ul4").on('click','li',function() {
                 var el_start = $(this).parent().parent().index()
@@ -92,15 +120,9 @@
                 for(let index = el_start+1;index<=7;index++){
                     delete formContent3[`step_`+index]
                 }
-                // if($(this).hasClass("act")){						
-                //     $(this).removeClass('act');
-                //     delete formContent3[$(this).parent()[0].id]
-                //     // formContent3[$(this).parent()[0].id] = ''
-                // }else{						
-                    $(this).addClass('act');	
-                    $(this).siblings('li').removeClass('act')
-                    formContent3[$(this).parent()[0].id] = $(this).data('name')
-                // }	
+                $(this).addClass('act');	
+                $(this).siblings('li').removeClass('act')
+                formContent3[$(this).parent()[0].id] = $(this).data('name')
                 aick_query()
             });
         })
@@ -125,6 +147,12 @@
                             </div>
                         `)
                     })
+                }else{
+                    if(formContent3.step==7){
+                        $('.dialog').show()
+                        $('.result').empty()
+                        $('.result').append(`<p>${formContent3.step_1}</p><p>-->${formContent3.step_2}</p><p>---->${formContent3.step_3}</p><p>------>${formContent3.step_4}</p><p>-------->${formContent3.step_5}</p><p>----------->${formContent3.step_6}</p>`)
+                    }
                 }
                 var el = $('.aick .box')
                 var parent_ul = $('.aick .ul4')

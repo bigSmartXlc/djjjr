@@ -170,6 +170,7 @@ body{background:#575d79;height:auto;background:linear-gradient(135deg,rgb(73,78,
     right:0
 }
 .dialog .dialog_contant{
+    position: relative;
     text-align: center;
     color: #0c0b0b;
     padding: 0.1rem;
@@ -194,6 +195,44 @@ body{background:#575d79;height:auto;background:linear-gradient(135deg,rgb(73,78,
 .dialog .dialog_contant .margin span{
     color: red;
     text-decoration:underline;
+}
+.dialog .dialog_contant .uploadTips{
+    padding: 0.05rem;
+    margin-top: 0.2rem;
+    font-weight: 500;
+    background-color: red;
+    color: #fff;
+}
+.dialog .dialog_contant .upload_btn{
+    margin-left: 80%;
+    margin-top: 0.2rem;
+    padding: 0.05rem;
+    background: linear-gradient(90deg,#5e94f7 ,#763fe8);;
+    border-radius: 0.05rem;
+    color: #fff;
+    font-weight: 700;
+}
+.dialog .result p{
+    padding: 0.08rem;
+}
+.dialog .result_dialog1,.dialog .result_dialog{
+    display: none;
+}
+.result_msg{
+    border-radius: 0.05rem;
+    display: none;
+    text-align: center;
+    position: fixed;
+    font-size: 0.14rem;
+    top: 50%;
+    left: 50%;
+    width: 1.2rem;
+    height: 0.4rem;
+    line-height: 0.4rem;
+    transform: translate(-50%,-50%);
+    background: rgba(0,0,0,.5);
+    color: #fff;
+    z-index: 100;
 }
 /* equipment-css */
 .item{position:relative;display:inline-block;height:1.15rem;width:2.8rem;float:left;background:#404a6d;border-bottom:.03rem solid #fff;margin:0 .1rem .1rem}
